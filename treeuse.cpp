@@ -120,7 +120,8 @@ int heightoftree(TreeNode<int> *root){
         int tempheight=heightoftree(root->children[i]);
         height=max(tempheight,height);
     }
-return height+1;
+    height+=1;
+return height;
     
 
 }
@@ -141,9 +142,53 @@ return ;
 
 for(int i=0;i<root->children.size();i++)
 {
-    depthoftree(root->children[i],--depth);
+    depthoftree(root->children[i],depth-1);
 }
 }
+
+
+
+
+void num_of_leafnode(TreeNode<int> * root)
+{
+    int ans=1;
+        if(root->children.size()==0)
+        {
+            cout<<ans;
+            return;
+        }
+    for(int i=0;i<root->children.size();i++)
+    {
+        
+
+    }
+    
+}
+
+void preorder(TreeNode<int> * root)
+{
+    if(root==NULL)
+    return ;
+    cout<<root->data<<" ";
+    for(int i=0;i<root->children.size();i++)
+    {
+            preorder(root->children[i]);
+    }
+
+}
+
+void postorder(TreeNode<int> * root)
+{
+    if(root==NULL)
+    return ;
+    for(int i=0;i<root->children.size();i++)
+    {
+            preorder(root->children[i]);
+    }
+    cout<<root->data<<" ";
+
+}
+
 
 int main()
 {
@@ -161,12 +206,21 @@ int main()
 
 
 // TreeNode<int> *root=takeinput();
-TreeNode<int> * root=takeinput();
+TreeNode<int> * root=takeinputlevelwise();
 printtreelevelwise(root);
 cout<<endl;
 
 // printtree(root);
 
-cout<<heightoftree(root);
+cout<<"height: "<<heightoftree(root)<<endl;
+//value:  1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
+
+
+cout<<"depth node: "<<endl;
+depthoftree(root, 2);
+cout<<endl<<"Preorder Treversal: "<<endl;
+preorder(root);
+cout<<endl<<"Postorder Treversal: "<<endl;
+postorder(root);
     return 0;
 }
