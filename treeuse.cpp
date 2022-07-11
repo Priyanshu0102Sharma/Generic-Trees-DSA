@@ -65,10 +65,6 @@ TreeNode<int>* takeinput()
     return root;
 }
 
-int heightoftree(TreeNode<int>* root)
-{
-
-}
 
 void printtreelevelwise(TreeNode<int>*root)
 {
@@ -117,6 +113,38 @@ for(int i=0;i<root->children.size();i++)
 return ans;
 }
 
+int heightoftree(TreeNode<int> *root){
+    int height=-1;
+    for(int i=0;i<root->children.size();i++)
+    {
+        int tempheight=heightoftree(root->children[i]);
+        height=max(tempheight,height);
+    }
+return height+1;
+    
+
+}
+
+void depthoftree(TreeNode<int> * root, int depth)
+{
+// edge case
+if(root==NULL)
+return ;
+
+
+    // base case
+    if(depth==0)
+    {
+        cout<<root->data<<endl;
+        return;
+    }
+
+for(int i=0;i<root->children.size();i++)
+{
+    depthoftree(root->children[i],--depth);
+}
+}
+
 int main()
 {
 
@@ -132,9 +160,13 @@ int main()
 // root->children.push_back(Node2);
 
 
-TreeNode<int> *root=takeinput();
-// TreeNode<int> * root=takeinput();
+// TreeNode<int> *root=takeinput();
+TreeNode<int> * root=takeinput();
+printtreelevelwise(root);
+cout<<endl;
 
-printtree(root);
+// printtree(root);
+
+cout<<heightoftree(root);
     return 0;
 }
